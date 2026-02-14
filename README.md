@@ -1,2 +1,25 @@
-# Plasma-Modulated-Infrared-Transceiver-PMIR-
-The Plasma-Modulated Infrared Transceiver (PMIRT) consists of a controlled corona discharge region placed between a Samsung TV remote and a VS1838B IR receiver. By adjusting electrode separation, the ionization intensity will vary, allowing the effect on the decoded IR signal to be measured.
+# Plasma-Modulated-Infrared-Transceiver-PMIRT
+
+#include <IRremote.h>
+
+void setup() {
+  // code here runs once:
+  IrReceiver.begin(11, ENABLE_LED_FEEDBACK);
+  Serial.begin(9600);
+  Serial.print("Start now:");
+}
+ 
+void loop() {
+  // code here runs repeatedly:
+  if (IrReceiver.decode()) {
+    unsigned long code = IrReceiver.decodedIRData.decodedRawData;
+    Serial.println(code, HEX);
+  }
+  IrReceiver.resume(); 
+  delay(500);
+}
+
+
+
+
+
